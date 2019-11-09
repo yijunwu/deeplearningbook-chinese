@@ -240,7 +240,7 @@ NVIDIA的CUDA编程语言使得我们可以用一种像C一样的语言实现任
 当\gls{gater}决策的数量很小时，这个策略效果会很好，因为它不是组合的。
 但是当我们想要选择不同的单元或参数子集时，不可能使用``软开关''，因为它需要枚举（和计算输出）所有的\gls{gater}配置。
 为了解决这个问题，许多工作探索了几种方法来训练组合的\gls{gater}。
-\citet{bengio2013estimating}提出使用\gls{gater}概率梯度的若干估计器，而~\citet{Bacon-et-al-RLDM2015,BengioE-et-al-arXiv2015}使用\gls{RL}技术（\firstgls{policy_gradient}）来学习一种条件的~\gls{dropout}~形式（作用于\gls{hidden_unit}块），减少了实际的计算成本，而不会对近似的质量产生负面影响。
+\citet{bengio2013estimating}提出使用\gls{gater}概率梯度的若干估计器，而~\citet{Bacon-et-al-RLDM2015,BengioE-et-al-arXiv2015}使用\gls{RL}技术（\firstgls{policy_gradient}）来学习一种（作用于\gls{hidden_unit}块）~\gls{dropout}~的条件形式，减少了实际的计算成本，而不会对近似的质量产生负面影响。
 % 438
 
 
@@ -253,7 +253,7 @@ NVIDIA的CUDA编程语言使得我们可以用一种像C一样的语言实现任
 
 
 
-使用动态结构化系统的主要障碍是由于系统针对不同输入的不同代码分支导致的并行度降低。
+使用动态结构系统的主要障碍是由于系统针对不同输入的不同代码分支导致的并行度降低。
 这意味着网络中只有很少的操作可以被描述为对样本\gls{minibatch}的矩阵乘法或批量卷积。
 我们可以写更多的专用子程序，用不同的核对样本做卷积，或者通过不同的权重列来乘以设计矩阵的每一行。
 不幸的是，这些专用的子程序难以高效地实现。
@@ -404,7 +404,7 @@ NVIDIA的CUDA编程语言使得我们可以用一种像C一样的语言实现任
 这可能是一个有用的属性，因为\gls{NN}往往更好地响应空间方向，而不是精确的位置。
 响应相同方向上的多个距离需要具有共线权重向量但具有不同偏置的\gls{hidden_unit}。
 这样的情况对于学习算法来说可能是困难的。
-此外，许多浅层的图模型把多个分离的模式表示在一条线上会出现问题。
+此外，许多浅层的图模型把多个分离的模式表示在一条线上会有问题。
 \glssymbol{GCN}~采用一个样本一个方向\footnote{译者：所有样本相似的距离}而不是不同的方向和距离来避免这些问题。
 % 444 head
 
@@ -471,7 +471,7 @@ $s$和$\epsilon$的取值与之前一样。}
 在彩色图像的情况下，一些策略单独处理不同的颜色通道，而其他策略组合来自不同通道的信息以使每个像素归一化\citep{sermanet-icpr-12}。
 % 444
 
-\gls{LCN}通常可以通过使用可分离卷积（参考\secref{sec:efficient_convolution_algorithms}）来计算\gls{feature_map}的局部平均值和局部\gls{standard_deviation}，然后在不同的\gls{feature_map}上使用逐元素的减法和除法。
+\gls{LCN}通常可以通过使用可分离卷积（参考\secref{sec:efficient_convolution_algorithms}）来计算\gls{feature_map}的局部平均值和局部\gls{standard_deviation}，然后在不同的\gls{feature_map}上使用逐元素的减法和除法来实现。
 % 444
 
 \gls{LCN}是可微分的操作，并且还可以作为一种非线性作用应用于网络隐藏层，以及应用于输入的预处理操作。
@@ -869,7 +869,7 @@ $|\SetV|$因子可以降低到$\log |\SetV|$一样低，而无需执行与$|\Set
 \firstgls{importance_sampling}不仅可以加速具有较大~\ENNAME{softmax}~输出的模型。
 更一般地，它可以加速具有大稀疏输出层的训练，其中输出是稀疏向量而不是$n$选$1$。
 其中一个例子是\firstgls{bag_of_words}。
-\gls{bag_of_words}具有稀疏向量$\Vv$，其中$v_i$表示词汇表中的词$i$存不存在文档中。
+\gls{bag_of_words}具有稀疏向量$\Vv$，其中$v_i$表示词汇表中的词$i$有没有出现在文档中。
 或者，$v_i$可以指示词$i$出现的次数。
 由于各种原因，训练产生这种稀疏向量的\gls{ML}模型的成本可能很高。
 在学习的早期，模型可能不会真的使输出真正稀疏。
@@ -908,7 +908,7 @@ $|\SetV|$因子可以降低到$\log |\SetV|$一样低，而无需执行与$|\Set
 相比之下，将\gls{NN}的参数数目加倍通常也大致加倍计算时间。
 当然，避免每次计算时使用所有参数的模型是一个例外。
 嵌入层每次只索引单个嵌入，所以我们可以增加词汇量，而不会增加每个样本的计算时间。
-一些其他模型，例如平铺\gls{convolutional_network}，可以在减少\gls{parameter_sharing}程度的同时添加参数以保持相同的计算量。然而，基于矩阵乘法的典型\gls{NN}层需要与参数数量成比例的计算量。
+一些其他模型，例如平铺\gls{convolutional_network}，可以在增加参数的同时增加\footnote{译者：原文为减少，但综合判断疑应为增加}\gls{parameter_sharing}程度，以保持相同的计算量。然而，基于矩阵乘法的典型\gls{NN}层需要与参数数量成比例的计算量。
 
 因此，增加\gls{capacity}的一种简单方法是将两种方法结合，由\gls{NLM}和~\gls{n_gram}~\gls{language_model}组成\gls{ensemble}~\citep{BenDucVin01-small,Bengio-nnlm2003-small}。
 

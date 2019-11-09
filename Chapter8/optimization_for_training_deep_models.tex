@@ -48,7 +48,7 @@
 其中$L$是每个样本的\gls{loss_function}，$f(\Vx;\Vtheta)$是输入$\Vx$时所预测的输出，$\hat{p}_{\text{data}}$是\gls{empirical_distribution}。
 \gls{supervised_learning}中，$y$是目标输出。
 在本章中，我们会介绍不带\gls{regularization}的\gls{supervised}学习，$L$的变量是$f(\Vx;\Vtheta)$和$y$。
-不难将这种\gls{supervised_learning}扩展成其他形式，如包括$\Vtheta$或者$\Vx$作为参数，或是去掉参数$y$，以发展不同形式的\gls{regularization}或是\gls{unsupervised_learning}。
+不难将这种\gls{supervised_learning}扩展成其他形式，如函数$L$包括$\Vtheta$或者$\Vx$作为参数，或是去掉参数$y$，以发展不同形式的\gls{regularization}或是\gls{unsupervised_learning}。
 % 268 mid
 
 
@@ -113,7 +113,7 @@
 
 在某些情况下，\gls{surrogate_loss_function}比原函数学到的更多。
 例如，使用对数似然替代函数时，在\gls{training_set}上的$0-1$损失达到$0$之后，\gls{test_set}上的$0-1$损失还能持续下降很长一段时间。
-这是因为即使$0-1$损失期望是零时，我们还能拉开不同类别的距离以改进分类器的鲁棒性，获得一个更强壮的、更值得信赖的分类器，从而，相对于简单地最小化\gls{training_set}上的平均$0-1$损失，它能够从训练数据中抽取更多信息。
+这是因为即使$0-1$损失期望是零时，我们还能拉开不同类别的距离以改进分类器的鲁棒性，获得一个更强壮的、更值得信赖的分类器，从而，相对于简单地最小化\gls{training_set}上的平均$0-1$损失，它能够从训练数据中提取更多信息。
 % 270 head
 
 
@@ -368,7 +368,7 @@
 
 
 % -- 276 mid
-尽管\gls{ill_conditioning}还存在于除了\gls{NN}训练的其他情况中，有些适用于其他情况的解决\gls{ill_conditioning}的技术并不适用于\gls{NN}。
+尽管\gls{ill_conditioning}也存在于除了\gls{NN}训练的其他情况中，有些适用于其他情况的解决\gls{ill_conditioning}的技术并不适用于\gls{NN}。
 例如，\gls{newton_method}在解决带有\gls{poor_conditioning}的\,\gls{hessian}\,矩阵的\gls{convex_optimization}问题时，是一个非常优秀的工具，
 但是我们将会在以下小节中说明\gls{newton_method}运用到\gls{NN}时需要很大的改动。
 
@@ -412,8 +412,8 @@
 
 
 如果\gls{local_minima}相比\gls{global_minimum}拥有很大的\gls{cost}，\gls{local_minima}会带来很大的隐患。
-我们可以构建没有\gls{hidden_unit}的小规模\gls{NN}，其\gls{local_minima}的\gls{cost}比\gls{global_minimum}的\gls{cost}大很多~\citep{Sontag-cs89,Brady89,Gori-pami91}。
-如果具有很大\gls{cost}的\gls{local_minima}是常见的，那么这将给基于梯度的优化算法带来极大的问题。
+我们可以构建甚至没有\gls{hidden_unit}的小规模\gls{NN}，其\gls{local_minima}的\gls{cost}比\gls{global_minimum}的\gls{cost}大很多~\citep{Sontag-cs89,Brady89,Gori-pami91}。
+如果具有很大\gls{cost}的\gls{local_minima}是常见的，那么这将给基于梯度的优化算法带来严重的问题。
 % -- 277 end
 
 
@@ -480,7 +480,7 @@
 对于只使用梯度信息的一阶优化算法而言，目前情况还不清楚。
 \gls{saddle_points}附近的梯度通常会非常小。
 另一方面，实验中\gls{GD}似乎可以在许多情况下逃离\gls{saddle_points}。
-\cite{GoodfellowOptimization15}可视化了最新\gls{NN}的几个学习轨迹，\figref{fig:chap8_plot_atmu_relu_5}\,给了一个例子。
+\cite{GoodfellowOptimization15}可视化了最新(State Of The Art)\gls{NN}的几个学习轨迹，\figref{fig:chap8_plot_atmu_relu_5}\,给了一个例子。
 这些可视化显示，在突出的\gls{saddle_points}附近，\gls{cost_function}都是平坦的，权重都为零。
 但是他们也展示了\gls{GD}轨迹能够迅速逸出该区间。
 \cite{GoodfellowOptimization15}也主张，应该可以通过分析来表明连续时间的\gls{GD}会逃离而不是吸引到\gls{saddle_points}，但对\gls{GD}更现实的使用场景来说，情况或许会有所不同。
@@ -626,7 +626,7 @@
 
 \subsection{局部和全局结构间的弱对应}
 \label{sec:poor_correspondence_between_local_and_global_structure}
-迄今为止，我们讨论的许多问题都是关于\gls{loss_function}在单个点的性质——若$J(\Vtheta)$是当前点$\Vtheta$的\gls{poor_conditioning}，或者$\Vtheta$在悬崖中，或者$\Vtheta$是一个下降方向不明显的\gls{saddle_points}，那么会很难更新当前步。
+迄今为止，我们讨论的许多问题都是关于\gls{loss_function}在单个点的性质——若$J(\Vtheta)$在当前点$\Vtheta$具有\gls{poor_conditioning}，或者$\Vtheta$在悬崖中，或者$\Vtheta$是一个下降方向不明显的\gls{saddle_points}，那么会很难更新当前步。
 
 % 283 mid
 
@@ -932,7 +932,7 @@
     \Vf(t) &= \frac{\partial}{\partial t} \Vv(t) .
 \end{align}
 由此，\gls{momentum}算法包括通过数值模拟求解\gls{differential_equation}。
-求解\gls{differential_equation}的一个简单数值方法是欧拉方法，通过在每个梯度方向上小且有限的步来简单模拟该等式定义的动力学。
+求解\gls{differential_equation}的一个简单数值方法是欧拉方法，通过在每个梯度方向上小且有限的一步来（调整速度进而）简单模拟该等式定义的动力学。
 % 290 mid
 
 
@@ -1079,7 +1079,7 @@
 从这个角度来看，选择$\Vtheta_0$接近$0$是有道理的。
 这个先验表明，单元间彼此互不交互比交互更有可能。
 只有在目标函数的似然项表达出对交互很强的偏好时，单元才会交互。
-另一方面，如果我们初始化$\Vtheta_0$为很大的值，那么我们的先验指定了哪些单元应互相交互，以及它们应如何交互。
+反过来，如果我们初始化$\Vtheta_0$为很大的值，那么我们的先验指定了哪些单元应互相交互，以及它们应如何交互。
 % 294 end
 
 
@@ -1549,14 +1549,14 @@ Adam通常被认为对\gls{hyperparameter}的选择相当鲁棒，尽管\gls{lea
 目前，我们已经讨论了用于二次\gls{objective_function}的\gls{CG}法。
 当然，本章我们主要关注于探索训练\gls{NN}和其他相关\gls{DL}模型的优化方法，其对应的\gls{objective_function}比二次函数复杂得多。
 或许令人惊讶，\gls{CG}法在这种情况下仍然是适用的，尽管需要作一些修改。
-没有目标是二次的保证，共轭方向也不再保证在以前方向上的目标仍是极小值。
-其结果是，\textbf{\gls{nonlinear_CG}法}\,算法会包括一些偶尔的重设，\gls{CG}法沿未修改的梯度重启线搜索。
+没有目标是二次的保证，共轭方向也不再保证在以前方向上目标仍是极小值。
+其结果是，\textbf{\gls{nonlinear_CG}法}\,算法会包括一些偶尔的重设，即\gls{CG}法沿未修改的梯度重启线搜索。
 
 % -- 306 --
 
 实践者报告在实践中使用\gls{nonlinear_CG}法训练\gls{NN}是合理的，尽管在开始\gls{nonlinear_CG}法前使用\gls{SGD}迭代若干步来初始化效果更好。
 另外，尽管（非线性）\gls{CG}法传统上作为批方法，\gls{minibatch}版本已经成功用于训练\gls{NN}~\citep{Le-ICML2011}。
-针对神经网路的\gls{CG}法应用早已被提出，例如缩放的\gls{CG}法\citep{Moller}。
+针对神经网络的\gls{CG}法应用早已被提出，例如缩放的\gls{CG}法\citep{Moller}。
 
 \subsection{\glsentrytext{BFGS}}
 \label{sec:bfgs}
@@ -1568,7 +1568,7 @@ Adam通常被认为对\gls{hyperparameter}的选择相当鲁棒，尽管\gls{lea
 \end{equation}
 其中，$\MH$是$J$相对于$\Vtheta$的\,\gls{hessian}\,矩阵在$\Vtheta_0$处的估计。
 运用\gls{newton_method}的主要计算难点在于计算\,\gls{hessian}\,逆$\MH^{-1}$。
-拟\gls{newton_method}所采用的方法（\gls{BFGS}\,是其中最突出的）是使用矩阵$\MM_t$近似逆，迭代地低秩更新精度以更好地近似$\MH^{-1}$。
+拟\gls{newton_method}所采用的方法（\gls{BFGS}\,是其中最突出的）是使用矩阵$\MM_t$近似逆，迭代地做低秩更新以更好地近似$\MH^{-1}$。
 
 % -- 307 --
 
@@ -1771,7 +1771,7 @@ Polyak平均\citep{Polyak+Juditsky-1992}会平均优化算法在参数空间访�
 令人遗憾的是，结合各个最佳的部分不能保证得到一个最佳的完整解。
 然而，贪心算法计算上比求解最优联合解的算法高效得多，并且贪心算法的解在不是最优的情况下，往往也是可以接受的。
 贪心算法也可以紧接一个\firstgls{fine_tuning}阶段，联合优化算法搜索全问题的最优解。
-使用贪心解初始化联合优化算法，可以极大地加速算法，并提高寻找到的解的质量。
+使用贪心解初始化联合优化算法，可以极大地加速算法，并提高找到的解的质量。
 
 \gls{pretraining}算法，特别是贪心\gls{pretraining}，在\gls{DL}中是普遍存在的。
 在本节中，我们会具体描述这些将监督学习问题分解成其他简化的监督学习问题的\gls{pretraining}算法。
@@ -1807,7 +1807,7 @@ Polyak平均\citep{Polyak+Juditsky-1992}会平均优化算法在参数空间访�
 
 为什么\gls{greedy_supervised_pretraining}会有帮助呢？
 最初由~\cite{Bengio-nips-2006}提出的假说是，其有助于更好地指导深层结构的中间层的学习。
-一般情况下，\gls{pretraining}对于优化和\gls{generalization}都是有帮助的。
+一般情况下，\gls{pretraining}对于优化和\gls{generalization}两者都是有帮助的。
 
 另一个与监督\gls{pretraining}有关的方法扩展了迁移学习的想法：\cite{yosinski-nips2014}在一组任务上\gls{pretraining}了$8$层权重的深度卷积网络（1000个ImageNet对象类的子集），然而用该网络的前$k$层初始化同样规模的网络。
 然后第二个网络的所有层（上层随机初始化）联合训练以执行不同的任务（1000个ImageNet对象类的另一个子集），但训练样本少于第一个任务。

@@ -50,7 +50,7 @@
 
 \section{参数范数惩罚}
 \label{sec:parameter_norm_penalties}
-\gls{regularization}在\gls{DL}的出现前就已经被使用了数十年。
+\gls{regularization}在\gls{DL}出现前就已经被使用了数十年。
 \gls{linear_model}，如\gls{linear_regression}和\gls{logistic_regression}可以使用简单、直接、有效的\gls{regularization}策略。
 
 许多\gls{regularization}方法通过对\gls{objective_function} $J$添加一个参数范数惩罚$\Omega(\Vtheta)$，限制模型（如\gls{NN}、\gls{linear_regression}或\gls{logistic_regression}）的学习能力。
@@ -445,7 +445,7 @@ $L^1$惩罚使部分子集的权重为零，表明相应的特征可以被安全
 假设算法$A$在没有数据集增强时表现不佳，而$B$结合大量人工转换的数据后表现良好。
 在这样的情况下，很可能是合成转化引起了性能改进，而不是\gls{ML}算法$B$比算法$A$更好。 
 有时候，确定实验是否已经适当控制需要主观判断。
-例如，向输入注入噪声的\gls{ML}算法是执行数据集增强的一种形式。
+例如，向输入注入噪声的\gls{ML}算法可以看做是执行了一种形式的数据集增强。
 通常，普适操作（例如，向输入添加高斯噪声）被认为是\gls{ML}算法的一部分，
 而特定于一个应用领域（如随机地裁剪图像）的操作被认为是独立的预处理步骤。
 
@@ -486,7 +486,7 @@ $L^1$惩罚使部分子集的权重为零，表明相应的特征可以被安全
 对于小的$\eta$，最小化带权重噪声（方差为$\eta \MI$\,）的$J$等同于最小化附加\gls{regularization}项：
 $ \eta \SetE_{p(\Vx,y)}[\norm{\nabla_{\MW}~\hat y(\Vx)}^2]$的$J$。
 这种形式的\gls{regularization}鼓励参数进入权重小扰动对输出相对影响较小的参数空间区域。
-换句话说，它推动模型进入对权重小的变化相对不敏感的区域，找到的点不只是极小点，还是由平坦区域所包围的极小点\citep{Hochreiter95}。
+换句话说，它推动模型进入对权重小的变化相对不敏感的区域，找到的点不再只是极小点，还是由平坦区域所包围的极小点\citep{Hochreiter95}。
 在简化的线性回归中（例如，$\hat y(\Vx) = \Vw^\top \Vx + b$），正则项退化为$ \eta \SetE_{p(\Vx)}[\norm{\Vx}^2]$，这与函数的参数无关，因此不会对$\tilde J_{\Vw}$关于模型参数的梯度有影响。
 
 % -- 235 --
@@ -510,7 +510,7 @@ $ \eta \SetE_{p(\Vx,y)}[\norm{\nabla_{\MW}~\hat y(\Vx)}^2]$的$J$。
 
 \section{\glsentrytext{semi_supervised_learning}}
 \label{sec:semi_supervised_learning}
-在\gls{semi_supervised_learning}的框架下，$P(\RVx)$产生的未标记样本和$P(\RVx, \RVy)$中的标记样本都用于估计$P(\RVy \mid \RVx)$或者根据$\RVx$预测$\RVy$。
+在\gls{semi_supervised_learning}的框架下，$P(\RVx)$产生的未标记样本和$P(\RVx, \RVy)$产生的标记样本两者都用来估计$P(\RVy \mid \RVx)$或者说根据$\RVx$预测$\RVy$。
 
 在\gls{DL}的背景下，\gls{semi_supervised_learning}通常指的是学习一个\gls{representation} $\Vh = f(\Vx)$。 
 学习\gls{representation}的目的是使相同类中的\gls{example}有类似的表示。
@@ -646,7 +646,7 @@ $ \eta \SetE_{p(\Vx,y)}[\norm{\nabla_{\MW}~\hat y(\Vx)}^2]$的$J$。
 
 \gls{early_stopping}是一种非常不显眼的\gls{regularization}形式，它几乎不需要改变基本训练过程、\gls{objective_function}或一组允许的参数值。
 这意味着，无需破坏学习动态就能很容易地使用\gls{early_stopping}。
-相对于\gls{weight_decay}，必须小心不能使用太多的\gls{weight_decay}，以防网络陷入不良\gls{local_minimum}(对应于病态的小权重)。
+这与\gls{weight_decay}形成对比，使用权重衰减的时候必须小心不能使用太多的\gls{weight_decay}，以防网络陷入不良\gls{local_minimum}(对应于病态的小权重)。
 
 \gls{early_stopping}可单独使用或与其他的\gls{regularization}策略结合使用。
 即使为鼓励更好泛化，使用\gls{regularization}策略改进\gls{objective_function}，在训练目标的\gls{local_minimum}达到最好泛化也是非常罕见的。
@@ -1396,9 +1396,9 @@ $\ +\ .007\ \times$ &%
 流形正切分类器\citep{Dauphin-et-al-NIPS2011}无需知道切线向量的先验。
 我们将在\chapref{chap:autoencoders}看到，\gls{AE}可以估算流形的切向量。
 流形正切分类器使用这种技术来避免用户指定切向量。
-如\figref{fig:chap14_cifar_cae}所示，这些估计的切向量不仅对图像经典几何变换（如转化、旋转和缩放）保持不变，还必须掌握对特定对象（如正在移动的身体某些部分）保持不变的因素。
+如\figref{fig:chap14_cifar_cae}所示，这些估计的切向量不仅对图像经典几何变换（如转化、旋转和缩放）保持不变，还学到了对特定对象（如正在移动的身体某些部分）保持不变的因素。
 因此根据流形正切分类器提出的算法相当简单：
-（1）使用\gls{AE}通过\gls{unsupervised_learning}来学习流形的结构，以及（2）如\gls{tangent_prop}（\eqnref{eq:767}）一样使用这些切面\gls{regularization}\gls{NN}分类器。
+（1）使用\gls{AE}通过\gls{unsupervised_learning}来学习流形的结构，（2）然后像在\gls{tangent_prop}（\eqnref{eq:767}）中一样使用这些切面\gls{regularization}\gls{NN}分类器。
 
 在本章中，我们已经描述了大多数用于\gls{regularization}\gls{NN}的通用策略。
 \gls{regularization}是\gls{ML}的中心主题，因此我们将不时在其余各章中重新回顾。

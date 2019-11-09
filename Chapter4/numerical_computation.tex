@@ -17,7 +17,7 @@
 
 一种极具毁灭性的舍入误差是\firstgls{underflow}。
 当接近零的数被四舍五入为零时发生\gls{underflow}。
-许多函数在其参数为零而不是一个很小的正数时才会表现出质的不同。
+许多函数在其参数为零而不是一个很小的正数时会表现出质的不同。
 例如，我们通常要避免被零除（一些软件环境将在这种情况下抛出异常，有些会返回一个非数字(not-a-number, NaN)的占位符）或避免取零的对数（这通常被视为$-\infty$，进一步的算术运算会使其变成非数字）。
 
 % -- 77 --
@@ -388,7 +388,7 @@ $x_1$轴是~\gls{hessian}~的一个特征向量，并且具有正特征值。
 在许多其他领域，优化的主要方法是为有限的函数族设计优化算法。
 
 在\gls{DL}的背景下，限制函数满足\firstgls{lipschitz_continuous}或其导数\gls{lipschitz}连续可以获得一些保证。
-\gls{lipschitz}~连续函数的变化速度以\firstgls{lipschitz_constant} $\CalL$为界：
+\gls{lipschitz}~连续函数的变化速度以一个\firstgls{lipschitz_constant} $\CalL$为界：
 \begin{align}
  \forall \Vx,~\forall \Vy, ~| f(\Vx) - f(\Vy)|  \leq \CalL \| \Vx - \Vy \|_2 .
 \end{align}
@@ -491,7 +491,7 @@ $x_1$轴是~\gls{hessian}~的一个特征向量，并且具有正特征值。
 $中的$\alpha_i = 0$。
 因此，我们可以观察到在该解中$\Valpha \odot \Vh(\Vx) = 0$。
 换句话说，对于所有的$i$， $\alpha_i \geq 0$或$ h^{(j)}(\Vx) \leq 0$在收敛时必有一个是活跃的。
-为了获得关于这个想法的一些直观解释，我们可以说这个解是由不等式强加的边界，我们必须通过对应的~\glssymbol{KKT}~乘子影响$\Vx$的解，或者不等式对解没有影响，我们则归零~\glssymbol{KKT}~乘子。
+为了获得关于这个想法的一些直观解释，我们可以说要么这个解是由不等式强加的边界，我们必须通过对应的~\glssymbol{KKT}~乘子影响$\Vx$的解，要么不等式对解没有影响，我们则归零~\glssymbol{KKT}~乘子。
 
 我们可以使用一组简单的性质来描述\gls{constrained_optimization}问题的最优点。
 这些性质称为\firstacr{KKT}条件\citep{Karush39,kuhn1951}。
@@ -570,7 +570,7 @@ $\lambda$的选择必须使结果服从约束。
 \end{align}
 当$\Vx$的范数超过1时，该导数是正的，所以为了跟随\gls{derivative}上坡并相对$\lambda$增加~\ENNAME{Lagrangian}，我们需要增加$\lambda$。
 因为$\Vx^\Tsp \Vx$的惩罚系数增加了，求解关于$\Vx$的线性方程现在将得到具有较小范数的解。
-求解线性方程和调整$\lambda$的过程将一直持续到$\Vx$具有正确的范数并且关于$\lambda$的\gls{derivative}是$0$。
+求解线性方程和调整$\lambda$的过程将一直持续到$\Vx$具有正确的范数，同时关于$\lambda$的\gls{derivative}是$0$。
 
 本章总结了开发\gls{ML}算法所需的数学基础。
 现在，我们已经准备好建立和分析一些成熟的学习系统。
